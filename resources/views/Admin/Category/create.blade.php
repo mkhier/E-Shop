@@ -1,8 +1,12 @@
 @extends('layouts.admin')
+@section('title')
+    {{__('Add Category')}}
+@endsection
+
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h4>Add Category</h4>
+            <h4>{{__('Add Category')}}</h4>
         </div>
         <div class="card-body">
             <form action="{{ url('store-category') }}" method="POST" enctype="multipart/form-data">

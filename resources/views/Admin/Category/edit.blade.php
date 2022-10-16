@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title')
+    {{__('Edit/Update Category')}}
+@endsection
 @section('content')
     <div class="card">
         <div class="card-header">

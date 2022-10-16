@@ -18,10 +18,10 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Order ID</th>
-                                    <th>Total Price</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th>{{__('Order ID')}}</th>
+                                    <th>{{__('Total Price')}}</th>
+                                    <th>{{__('Status')}}</th>
+                                    <th>{{__('Action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,7 +32,7 @@
                                         <td>{{ $item->total_price }}</td>
                                         <td>{{ $item->status == '0' ? 'Pending' : 'Completed' }}</td>
                                         <td>
-                                            <a href="{{ url('view-order/' . $item->id) }}" class="btn btn-primary">View</a>
+                                            <a href="{{ url('view-order/' . $item->id) }}" class="btn btn-primary">{{__('View')}}</a>
                                         </td>
                                     </tr>
                                 @endforeach

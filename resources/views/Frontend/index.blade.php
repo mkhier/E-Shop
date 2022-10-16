@@ -10,7 +10,7 @@
     <div class="py-5">
         <div class="container">
             <div class="row">
-                <h2>Featured Products</h2>
+                <h2>{{__('Featured Products')}}</h2>
                 <div class="owl-carousel featured_carousel owl-theme">
                     @foreach ($featured_product as $prod)
                         <div class="item">
@@ -35,7 +35,7 @@
     <div class="py-5">
         <div class="container">
             <div class="row">
-                <h2>Trending Category</h2>
+                <h2>{{__('Trending Categories')}}</h2>
                 <div class="owl-carousel featured_carousel owl-theme">
                     @foreach ($trending_category as $tcategory)
                         <div class="item">

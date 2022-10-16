@@ -9,7 +9,7 @@
         <form action="{{url('place-order')}}" method="POST">
             {{csrf_field()}}
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <div class="card">
                     <h6>{{ __('Basic Details') }}</h6>
                     <hr>
@@ -31,7 +31,7 @@
                             <input type="text" class="form-control" value="{{Auth::user()->phone}}" name="phone" placeholder="Enter Phone Number">
                         </div>
                         <div class="col-md-6 mt-3">
-                            <label for="">{{ __('Address 1') }}</label>
+                            <label for="">{{ __('Address') }}</label>
                             <input type="text" class="form-control" value="{{Auth::user()->address}}"  name="address1" placeholder="Enter Address One">
                         </div>
                         <div class="col-md-6 mt-3">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <h6>{{ __('Order Details') }}</h6>

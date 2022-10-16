@@ -17,32 +17,32 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 order-details">
-                                <h4>Shipping Details</h4>
+                                <h4>{{__('Shipping Details')}}</h4>
                                 <hr>
-                                <label for="">First Name</label>
+                                <label for="">{{__('First Name')}}</label>
                                 <div class="border">{{ $order->first_name }}</div>
-                                <label for="">Last Name</label>
+                                <label for="">{{__('Last Name')}}</label>
                                 <div class="border">{{ $order->last_name }}</div>
-                                <label for="">E-mail</label>
+                                <label for="">{{__('E-mail')}}</label>
                                 <div class="border">{{ $order->email }}</div>
-                                <label for="">Contact No.</label>
+                                <label for="">{{__('Contact No.')}}</label>
                                 <div class="border ">{{ $order->phone }}</div>
-                                <label for="">Shipping Address</label>
+                                <label for="">{{__('Shipping Address')}}</label>
                                 <div class="border">
                                     {{ $order->address }} ,<br>
                                     {{ $order->city }} ,<br>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h4>Order Details</h4>
+                                <h4>{{__('Order Details')}}</h4>
                                 <hr>
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                            <th>Image</th>
+                                            <th>{{__('Name')}}</th>
+                                            <th>{{__('Quantity')}}</th>
+                                            <th>{{__('Price')}}</th>
+                                            <th>{{__('Image')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -59,7 +59,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <h4 class="px-2">Grand Total : <span class="float-end">{{ $order->total_price }}</span>
+                                <h4 class="px-2">{{__('Grand Total :')}} <span class="float-end">{{ $order->total_price }}</span>
                                 </h4>
                                 <div class="mt-5 px-2">
                                     <label for="">{{ __('Order Status') }}</label>
@@ -68,8 +68,8 @@
                                         @method('PUT')
                                         <select class="form-select" name="order_status">
                                             <option selected>Open this select menu</option>
-                                            <option {{ $order->status == '0' ? 'selected' : '' }}>Pending</option>
-                                            <option {{ $order->status == '1' ? 'selected' : '' }}>Completed</option>
+                                            <option {{ $order->status == '0' ? 'selected' : '' }}>{{__('Pending')}}</option>
+                                            <option {{ $order->status == '1' ? 'selected' : '' }}>{{__('Completed')}}</option>
                                         </select>
                                         <button type="submit" class="btn btn-primary float-end mt-3">
                                             {{ __('Update') }}

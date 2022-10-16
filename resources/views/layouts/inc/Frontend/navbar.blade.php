@@ -2,11 +2,11 @@
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">{{ __('E-Shop') }}</a>
         <div class="search-bar">
-            <form action="{{url('search-product')}}" method="POST">
+            <form action="{{ url('search-product') }}" method="POST">
                 @csrf
                 <div class="input-group">
-                    <input type="search" class="form-control" id="search_product" name="product_name" required placeholder="Seacrh Products"
-                        aria-describedby="basic-addon1">
+                    <input type="search" class="form-control" id="search_product" name="product_name" required
+                        placeholder="Seacrh Products" aria-describedby="basic-addon1">
                     <button type="submit" class="input-group-text"><i class="fa fa-search"></i></button>
                 </div>
             </form>

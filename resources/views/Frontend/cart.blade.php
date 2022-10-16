@@ -10,7 +10,7 @@
             <h6 class="mb-0">
                 <a href="{{ url('/') }}">
                     {{ __('Home') }}
-                </a>
+                </a> /
                 <a href="{{ url('cart') }}">
                     {{ __('Cart') }}
                 </a>

@@ -33,13 +33,19 @@ class FrontendController extends Controller
     public function view_product($cate_slug, $prod_slug)
     {
         if (Category::where('slug', $cate_slug)->exists()) {
+
             if (Product::where('slug', $prod_slug)->exists()) {
+
                 $products = Product::where('slug', $prod_slug)->first();
+                
                 return view('Frontend.Products.view',compact('products'));
-            } else {
+            }
+            else {
+
                 return redirect('/')->with('status', 'The Link is Broken');
             }
-        } else {
+        }
+        else {
             return redirect('/')->with('status', 'Category not found');
         }
     }

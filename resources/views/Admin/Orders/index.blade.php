@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h4 class="text-white">New Orders
+                        <h4 class="text-white">{{__('New Orders')}}
                             <a href="{{ url('order-history') }}"
                                 class="btn btn-warning float-right">{{ __('Order History') }}</a>
                         </h4>
@@ -19,10 +19,10 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Order ID</th>
-                                    <th>Total Price</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th>{{__('Order ID')}}</th>
+                                    <th>{{__('Total Price')}}</th>
+                                    <th>{{__('Status')}}</th>
+                                    <th>{{__('Action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
