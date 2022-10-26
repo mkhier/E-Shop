@@ -13,25 +13,26 @@ class CartController extends Controller
     public function add_product(Request $request)
     {
         $product_id = $request->input('product_id');
-        $product_qty = $request->input('product_qty');
+        $product_qty = $request->input('product_quantity');
 
         if (Auth::check()) {
 
-            $prod_check = Product::where('id', $product_id)->exists();
+            $prod_check = Product::where('id', $product_id)->first();
 
             if ($prod_check) {
 
-                if (Cart::where('product_id', $product_id)->where('user_id', Auth::id())->first()) {
+                if (Cart::where('product_id', $product_id)->where('user_id', Auth::id())->exists()) {
 
-                    return response()->json(['status' => $prod_check->name . "Already Added to cart"]);
+                    return response()->json(['status' => $prod_check->name . " Already Added to cart"]);
                 }
                 else {
-                    $cartitem = new Cart();
-                    $cartitem->product_id = $product_id;
-                    $cartitem->user_id = Auth::id();
-                    $cartitem->product_quantity = $product_qty;
-                    $cartitem->save();
-                    return response()->json(['status' => $prod_check->name . "Added to cart"]);
+
+                    $cartItem = new Cart();
+                    $cartItem->product_id = $product_id;
+                    $cartItem->user_id = Auth::id();
+                    $cartItem->product_quantity = $product_qty;
+                    $cartItem->save();
+                    return response()->json(['status' => $prod_check->name . " Added to cart"]);
                 }
             }
         }
@@ -40,10 +41,11 @@ class CartController extends Controller
         }
     }
 
+    
     public function view_cart()
     {
-        $cartitems = Cart::where('user_id' , Auth::id())->get();
-        return view('frontend.cart', compact('cartitems'));
+        $cartItems = Cart::where('user_id' , Auth::id())->get();
+        return view('frontend.cart', compact('cartItems'));
     }
 
     public function update_cart(Request $request)
@@ -67,8 +69,8 @@ class CartController extends Controller
         if (Auth::check()) {
             $prod_id = $request->input('product_id');
             if (Cart::where('product_id', $prod_id)->where('user_id', Auth::id())->exists()) {
-                $cartitem = Cart::where('product_id', $prod_id)->where('user_id', Auth::id())->first();
-                $cartitem->delete();
+                $cartItems = Cart::where('product_id', $prod_id)->where('user_id', Auth::id())->first();
+                $cartItems->delete();
                 return response()->json(['status' => 'Product Deleted Successfully']);
             }
         } else {

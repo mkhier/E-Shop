@@ -39,8 +39,9 @@
                 <div class="owl-carousel featured_carousel owl-theme">
                     @foreach ($trending_category as $tcategory)
                         <div class="item">
-                            <a href="{{ url('view-category/' . $tcategory->slug) }}">
+                            <a href="{{ url('category/' . $tcategory->slug) }}">
                                 <div class="card">
+                                    <img src="{{asset('assets/uploads/products/' .$tcategory->image)}}" alt="">
                                     <div class="card-body">
                                         <h5>{{ $tcategory->name }}</h5>
                                         <p>

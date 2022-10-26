@@ -30,7 +30,7 @@
                         <input type="text" name="slug" class ="form-control">
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="name">{{ __('small Description') }}</label>
+                        <label for="name">{{ __('Small Description') }}</label>
                         <textarea type="text" name="small_description" rows="3" class ="form-control"></textarea>
                     </div>
                     <div class="col-md-12 mb-3">
@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="name">{{ __('Status') }}</label>
-                        <input type="checkbox" name="status">
+                        <input type="checkbox" name="status" value="0">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="name">{{ __('Trending') }}</label>

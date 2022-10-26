@@ -13,26 +13,26 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('cat_id')->unsigned();
             $table->string('name');
             $table->string('slug');
-            $table->mediumText('small_description')->nullable();
-            $table->longText('description')->nullable();
+            $table->mediumText('small_description');
+            $table->longText('description');
             $table->string('original_price');
             $table->string('selling_price');
             $table->string('image');
             $table->string('quantity');
             $table->string('tax');
-            $table->tinyInteger('status')->default('0');
-            $table->tinyInteger('trending')->default('0');
+            $table->boolean('status');
+            $table->boolean('trending');
             $table->mediumText('meta_title')->nullable();
             $table->mediumText('meta_description')->nullable();
             $table->mediumText('meta_keywords')->nullable();
             $table->timestamps();
 
-            $table->foreign('cat_id')->references('id')->on('category');
+            $table->foreign('cat_id')->references('id')->on('categories');
         });
     }
 

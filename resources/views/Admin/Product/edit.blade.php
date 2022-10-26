@@ -18,7 +18,7 @@
                         <select class="form-select">
                             <option value="">{{$product->category->name}}</option>
                         </select>
-                        <Input  type="hidden"  name="cat_id" value="{{$product->cat_id}}">
+                        <Input type="hidden"  name="cat_id" value="{{$product->cat_id}}">
                     <div class="col-md-6 mb-3">
                         <label for="name">{{ __('Name') }}</label>
                         <input type="text" name="name" class=" form-control" value="{{ $product->name }}">
@@ -29,15 +29,14 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="name">{{ __('small Description') }}</label>
-                        <textarea type="text" name="small_description" rows="3" class=" form-control"
-                            value="{{ $product->small_description }}"></textarea>
+                        <textarea type="text" name="small_description" rows="3" class=" form-control">{{ $product->small_description }}</textarea>
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="name">{{ __('Description') }}</label>
-                        <textarea type="text" name="description" rows="3" class=" form-control" value="{{ $product->description }}"></textarea>
+                        <textarea type="text" name="description" rows="3" class=" form-control">{{ $product->description }}</textarea>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="name">{{ __('Original_Price') }}</label>
+                        <label for="name">{{ __('Original Price') }}</label>
                         <input type="number" name="original_price" class=" form-control"
                             value="{{ $product->original_price }}">
                     </div>
@@ -56,11 +55,11 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="name">{{ __('Status') }}</label>
-                        <input type="checkbox" name="status" value="{{ $product->status == '1' ? 'checked' : '' }}">
+                        <input type="checkbox" name="status" {{ $product->status == '1' ? 'checked' : '' }}>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="name">{{ __('Trending') }}</label>
-                        <input type="checkbox" name="popular" value="{{ $product->trending == '1' ? 'checked' : '' }}">
+                        <input type="checkbox" name="trending"{{ $product->trending == '1' ? 'checked' : '' }}>
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="name">{{ __('Meta Title') }}</label>
@@ -77,7 +76,7 @@
                             value="{{ $product->meta_description }}">
                     </div>
                     @if ($product->image)
-                        <img src="{{ asset('assets/uploads/products/' . $product->image) }}" alt="">
+                        <img src="{{ asset('assets/uploads/products/' . $product->image) }}" style="height: 200px; width:200px;" alt="">
                     @endif
                     <div class="col-md-12">
                         <input type="file" name="image" class=" form-control">

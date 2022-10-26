@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('price');
             $table->timestamps();
 
-            $table->foreign('order_id')->references('id')->on('order');
-            $table->foreign('product_id')->references('id')->on('product');
+            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('product_id')->references('id')->on('products');
 
         });
     }

@@ -27,7 +27,7 @@ class ProductController extends Controller
 
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
-            $filename = time(). '.' .$ext;
+            $filename = time() . '.' . $ext;
             $file->move('assets/uploads/products/', $filename);
             $product->image = $filename;
         }
@@ -40,8 +40,16 @@ class ProductController extends Controller
         $product->selling_price = $request->input('selling_price');
         $product->quantity = $request->input('quantity');
         $product->tax = $request->input('tax');
-        $product->status = $request->input('status') == true? '1' : '0';
-        $product->trending = $request->input('trending') == true? '1' : '0';
+        if ($request->has('status')) {
+            $product->status = 1;
+        } else {
+            $product->status = 0;
+        }
+        if ($request->has('trending')) {
+            $product->trending = 1;
+        } else {
+            $product->trending = 0;
+        }
         $product->meta_title = $request->input('meta_title');
         $product->meta_description = $request->input('meta_description');
         $product->meta_keywords = $request->input('meta_keywords');
@@ -77,8 +85,8 @@ class ProductController extends Controller
             $product->selling_price = $request->input('selling_price');
             $product->quantity = $request->input('quantity');
             $product->tax = $request->input('tax');
-            $product->status = $request->input('status') == true? '1' : '0';
-            $product->trending = $request->input('trending') == true? '1' : '0';
+            $product->status = $request->input('status') == true ? '1' : '0';
+            $product->trending = $request->input('trending') == true ? '1' : '0';
             $product->meta_title = $request->input('meta_title');
             $product->meta_description = $request->input('meta_description');
             $product->meta_keywords = $request->input('meta_keywords');

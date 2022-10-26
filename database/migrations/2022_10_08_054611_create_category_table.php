@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('slug');
             $table->longText('description');
-            $table->tinyInteger('status')->default('0');
-            $table->tinyInteger('popular')->default('0');
+            $table->string('image')->nullable();
+            $table->boolean('status')->default(false);
+            $table->boolean('popular')->default(false);
             $table->string('meta_title');
             $table->string('meta_description');
             $table->string('meta_keywords');

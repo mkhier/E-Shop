@@ -11,9 +11,10 @@
                     <h2>{{ __('All Categories') }}</h2>
                     <div class="row">
                         @foreach ($category as $cat)
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-3 mb-3">
                                 <a href="{{url('category/' .$cat->slug)}}">
                                     <div class="card">
+                                        <img src="{{asset('assets/uploads/categories/'.$cat->image)}}" alt="">
                                         <div class="card-body">
                                             <h5>{{ $cat->name }}</h5>
                                             <p>

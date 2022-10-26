@@ -17,11 +17,11 @@
                         <input type="text" name="name" class ="form-control">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="name">{{ __('Slug') }}</label>
+                        <label for="slug">{{ __('Slug') }}</label>
                         <input type="text" name="slug" class ="form-control">
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="name">{{ __('Description') }}</label>
+                        <label for="description">{{ __('Description') }}</label>
                         <textarea type="text" name="description" rows="3" class ="form-control"></textarea>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -43,6 +43,9 @@
                     <div class="col-md-12 mb-3">
                         <label for="name">{{ __('Meta Description') }}</label>
                         <input type="text" name="meta_description" class ="form-control">
+                    </div>
+                    <div class="col-md-12">
+                        <input type="file" name="image" class="form-control">
                     </div>
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary">{{__('Create')}}</button>
