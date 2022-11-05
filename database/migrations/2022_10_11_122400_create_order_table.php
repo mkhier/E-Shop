@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('city');
-            $table->boolean('status');
+            $table->boolean('status')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
