@@ -1,9 +1,34 @@
 $(document).ready(function () {
+    loadCart();
+    loadWishlist();
+
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
     });
+
+    function loadCart() {
+        $.ajax({
+            type: "GET",
+            url: "/load-cart-data",
+            success: function (response) {
+                $(".cart-count").html("");
+                $(".cart-count").html(response.count);
+            }
+        });
+    }
+
+    function loadWishlist() {
+        $.ajax({
+            type: "GET",
+            url: "/load-wishlist-count",
+            success: function (response) {
+                $(".wishlist-count").html("");
+                $(".wishlist-count").html(response.count);
+            }
+        });
+    }
 
     $(".addToCartBtn").click(function (e) {
         e.preventDefault();
@@ -24,6 +49,25 @@ $(document).ready(function () {
             },
             success: function (response) {
                 alert(response.status);
+            },
+        });
+    });
+
+    $(".addToWishlist").click(function (e) {
+        e.preventDefault();
+        var product_id = $(this)
+            .closest(".product_data")
+            .find(".prod_id")
+            .val();
+        $.ajax({
+            type: "POST",
+            url: "/add-to-wishlist",
+            data: {
+                product_id: product_id,
+            },
+            success: function (response) {
+                alert(response.status);
+                loadWishlist();
             },
         });
     });
@@ -71,6 +115,26 @@ $(document).ready(function () {
             },
         });
     });
+
+    $(".removeWishlist").click(function (e) {
+        e.preventDefault();
+        var product_id = $(this)
+            .closest(".product_data")
+            .find(".prod_id")
+            .val();
+        $.ajax({
+            type: "POST",
+            url: "/delete-wishlist-item",
+            data: {
+                product_id: product_id,
+            },
+            success: function (response) {
+                location.reload();
+                alert(response.status);
+            },
+        });
+    });
+
     $(".changeQuantity").click(function (e) {
         e.preventDefault();
         var prod_id = $(this).closest(".product_data").find(".prod_id").val();

@@ -67,9 +67,8 @@
                                         @csrf
                                         @method('PUT')
                                         <select class="form-select" name="order_status">
-                                            <option selected>Open this select menu</option>
-                                            <option {{ $order->status == '0' ? 'selected' : '' }}>{{__('Pending')}}</option>
-                                            <option {{ $order->status == '1' ? 'selected' : '' }}>{{__('Completed')}}</option>
+                                            <option {{ $order->status == '0' ? 'selected' : '' }} value="0">{{__('Pending')}}</option>
+                                            <option {{ $order->status == '1' ? 'selected' : '' }} value="1">{{__('Completed')}}</option>
                                         </select>
                                         <button type="submit" class="btn btn-primary float-end mt-3">
                                             {{ __('Update') }}

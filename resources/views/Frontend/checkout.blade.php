@@ -17,7 +17,7 @@
                             <div class="row checkout-form">
                                 <div class="col-md-6">
                                     <label for="first_name">First Name</label>
-                                    <input type="text" name="first_name" value="{{Auth::user()->first_name}}" placeholder="Enter First Name" class="form-control">
+                                    <input type="text" name="first_name" value="{{Auth::user()->name}}" placeholder="Enter First Name" class="form-control">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="Last_name">Last Name</label>

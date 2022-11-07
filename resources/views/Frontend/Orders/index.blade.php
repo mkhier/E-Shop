@@ -19,18 +19,19 @@
                                     <th>Order ID</th>
                                     <th>Total Price</th>
                                     <th>Status</th>
+                                    <th>Order Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($order as $item)
                                     <tr>
-                                        <td>{{ date('d-m-Y',strtotime($item->created_at)) }}</td>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->total_price }}</td>
                                         <td>{{ $item->status == '0' ? 'Pending' : 'Completed' }}</td>
+                                        <td>{{ date('d-M-Y H:i:s A',strtotime($item->created_at)) }}</td>
                                         <td>
-                                            <a href="{{ url('view-order/' .$item->id) }}" class="btn btn-primary">View</a>
+                                            <a href="{{ url('view-order/' .$item->id) }}" class="btn btn-primary text-white">View</a>
                                         </td>
                                     </tr>
                                 @endforeach

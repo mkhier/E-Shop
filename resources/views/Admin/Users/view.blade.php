@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('title')
+    {{$user->name .' ' .$user->last_name}}
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">
@@ -19,7 +23,7 @@
                             </div>
                             <div class="col-md-4 mt-3">
                                 <label for="">{{ __('First Name') }}</label>
-                                <div class="p-2 border">{{ $user->first_name }}</div>
+                                <div class="p-2 border">{{ $user->name }}</div>
                             </div>
                             <div class="col-md-4 mt-3">
                                 <label for="">{{ __('Last Name') }}</label>

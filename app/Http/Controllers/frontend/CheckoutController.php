@@ -29,7 +29,7 @@ class CheckoutController extends Controller
     {
         $order = new Order();
         $order->user_id = Auth::id();
-        $order->name = $request->input('name');
+        $order->first_name = $request->input('first_name');
         $order->last_name = $request->input('last_name');
         $order->email = $request->input('email');
         $order->phone = $request->input('phone');
@@ -40,7 +40,7 @@ class CheckoutController extends Controller
         $cartItems_total = Cart::where('user_id',Auth::id())->get();
         foreach($cartItems_total as $prod){
 
-            $total += $prod->product->selling_price;
+            $total += $prod->product->selling_price * $prod->product_quantity;
         }
         $order->total_price = $total;
         $order->save();
@@ -54,6 +54,9 @@ class CheckoutController extends Controller
                 'price' => $item->product->selling_price,
 
             ]);
+            $prod = Product::where('id',$item->product_id)->first();
+            $prod->quantity = $prod->quantity - $item->quantity;
+            $prod->update();
         }
         if(Auth::user()->address == null)
         {

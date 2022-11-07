@@ -26,7 +26,9 @@
                     </a>
                 </li>
                 <li class="nav-item {{ Request::is('wishlist') ? 'Active' : '' }}">
-                    <a class="nav-link" href="{{ url('wishlist') }}">{{ __('Wishlist') }}</a>
+                    <a class="nav-link" href="{{ url('wishlist') }}">{{ __('Wishlist') }}
+                        <span class="badge badge-pill bg-success wishlist-count">0</span>
+                    </a>
                 </li>
                 @guest
                     @if (Route::has('login'))

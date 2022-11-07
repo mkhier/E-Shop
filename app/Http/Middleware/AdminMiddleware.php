@@ -24,7 +24,7 @@ class AdminMiddleware
             }
             else
             {
-                return redirect('/home')->with('status','Access Denied not an Admin');
+                abort(403);
             }
         }
         else{
