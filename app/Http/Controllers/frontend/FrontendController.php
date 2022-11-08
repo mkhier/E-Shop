@@ -5,7 +5,9 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -13,7 +15,7 @@ class FrontendController extends Controller
     {
         $featured_product = Product::where('trending', '1')->take(15)->get();
         $trending_category = Category::where('popular', '1')->take(15)->get();
-        return view('Frontend.index', compact('featured_product','trending_category'));
+        return view('Frontend.index', compact('featured_product', 'trending_category'));
     }
     public function category()
     {
@@ -37,24 +39,31 @@ class FrontendController extends Controller
             if (Product::where('slug', $prod_slug)->exists()) {
 
                 $products = Product::where('slug', $prod_slug)->first();
+                $ratings = Rating::where('product_id', $products->id)->get();
+                $rating_sum = Rating::where('product_id', $products->id)->sum('stars_rated');
+                $user_rating = Rating::where('product_id', $products->id)->where('user_id',Auth::id())->first();
 
-                return view('Frontend.Products.view',compact('products'));
-            }
-            else {
+                if ($ratings->count() > 0) {
+                    $rating_value = $rating_sum / $ratings->count();
+                } else {
+                    $rating_value = 0;
+                }
+
+
+                return view('Frontend.Products.view', compact('products', 'ratings', 'rating_value','user_rating'));
+            } else {
 
                 return redirect('/')->with('status', 'The Link is Broken');
             }
-        }
-        else {
+        } else {
             return redirect('/')->with('status', 'Category not found');
         }
     }
     public function product_list_ajax()
     {
-        $products = Product::select('name')->where('status','0')->get();
+        $products = Product::select('name')->where('status', '0')->get();
         $data = [];
-        foreach($products as $item)
-        {
+        foreach ($products as $item) {
             $data[] = $item['name'];
         }
         return $data;
@@ -62,19 +71,14 @@ class FrontendController extends Controller
     public function search_product(Request $request)
     {
         $searched_product = $request->product_name;
-        if($searched_product != "")
-        {
-            $product = Product::where("name","LIKE","%$searched_product%")->first();
-            if($product)
-            {
-                return redirect('category/' .$product->category->slug .'/' .$product->slug);
+        if ($searched_product != "") {
+            $product = Product::where("name", "LIKE", "%$searched_product%")->first();
+            if ($product) {
+                return redirect('category/' . $product->category->slug . '/' . $product->slug);
+            } else {
+                return redirect()->back()->with('status', 'No Products Matched');
             }
-            else
-            {
-                return redirect()->back()->with('status','No Products Matched');
-            }
-        }
-        else{
+        } else {
             return redirect()->back();
         }
     }
