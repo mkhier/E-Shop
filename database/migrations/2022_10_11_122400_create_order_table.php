@@ -25,8 +25,7 @@ return new class extends Migration
             $table->boolean('status')->default(false);
             $table->string('total_price');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
+            
         });
     }
 

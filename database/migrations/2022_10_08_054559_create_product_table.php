@@ -31,8 +31,7 @@ return new class extends Migration
             $table->mediumText('meta_description')->nullable();
             $table->mediumText('meta_keywords')->nullable();
             $table->timestamps();
-
-            $table->foreign('cat_id')->references('id')->on('categories');
+            
         });
     }
 
