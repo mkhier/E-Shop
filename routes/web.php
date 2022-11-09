@@ -8,6 +8,7 @@ use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\frontend\RatingController;
+use App\Http\Controllers\frontend\ReviewController;
 use App\Http\Controllers\frontend\UserController;
 use App\Http\Controllers\frontend\WishlistController;
 use Illuminate\Support\Facades\Auth;
@@ -63,7 +64,14 @@ Route::middleware('auth')->group(function () {
 
     Route::post('add-rating', [RatingController::class, 'add']);
 
+    Route::get('add-review/{products_slug}/user-review',[ReviewController::class,'add']);
+    Route::post('add-review',[ReviewController::class,'create']);
+    Route::get('edit-review/{product_slug}/user-review',[ReviewController::class,'edit']);
+    Route::put('update-review',[ReviewController::class,'update']);
+
     Route::get('wishlist', [WishlistController::class, 'index']);
+    
+    Route::post('proceed-to-pay',[CheckoutController::class,'RazorPayCheck']);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

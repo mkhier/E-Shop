@@ -37,8 +37,8 @@ class CheckoutController extends Controller
         $order->city = $request->input('city');
 
         $total = 0;
-        $cartItems_total = Cart::where('user_id',Auth::id())->get();
-        foreach($cartItems_total as $prod){
+        $cartItems_total = Cart::where('user_id', Auth::id())->get();
+        foreach ($cartItems_total as $prod) {
 
             $total += $prod->product->selling_price * $prod->product_quantity;
         }
@@ -54,13 +54,12 @@ class CheckoutController extends Controller
                 'price' => $item->product->selling_price,
 
             ]);
-            $prod = Product::where('id',$item->product_id)->first();
+            $prod = Product::where('id', $item->product_id)->first();
             $prod->quantity = $prod->quantity - $item->quantity;
             $prod->update();
         }
-        if(Auth::user()->address == null)
-        {
-            $user = User::where('id',Auth::id())->first();
+        if (Auth::user()->address == null) {
+            $user = User::where('id', Auth::id())->first();
             $user->name = $request->input('name');
             $user->last_name = $request->input('last_name');
             $user->email = $request->input('email');
@@ -69,8 +68,30 @@ class CheckoutController extends Controller
             $user->city = $request->input('city');
             $user->update();
         }
-        $cartItems = Cart::where('user_id',Auth::id())->get();
+        $cartItems = Cart::where('user_id', Auth::id())->get();
         Cart::destroy($cartItems);
-        return redirect('/')->with('status' ,'Order Placed Successfully');
+        return redirect('/')->with('status', 'Order Placed Successfully');
+    }
+    public function RazorPayCheck(Request $request)
+    {
+        $cartItems = Cart::where('user_id', Auth::id())->get();
+        $total_price = 0;
+        foreach ($cartItems as $item) {
+            $total_price += $item->product->selling_price * $item->quantity;
+        }
+        $first_name = $request->input('first_name');
+        $last_name = $request->input('last_name');
+        $email = $request->input('email');
+        $phone = $request->input('phone');
+        $city = $request->input('city');
+
+        return response()->json([
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'email' => $email,
+            'phone' => $phone,
+            'city' => $city,
+            'total_price' => $total_price,
+        ]);
     }
 }
