@@ -37,7 +37,7 @@ Route::get('category', [FrontendController::class, 'category']);
 Route::get('category/{slug}', [FrontendController::class, 'view_category']);
 Route::get('category/{cate_slug}/{prod_slug}', [FrontendController::class, 'view_product']);
 
-Route::get('product-cart', [FrontendController::class, 'product_list_ajax']);
+Route::get('product-list', [FrontendController::class, 'product_list_ajax']);
 Route::post('search-product', [FrontendController::class, 'search_product']);
 
 Auth::routes();
@@ -70,11 +70,11 @@ Route::middleware('auth')->group(function () {
     Route::put('update-review',[ReviewController::class,'update']);
 
     Route::get('wishlist', [WishlistController::class, 'index']);
-    
+
     Route::post('proceed-to-pay',[CheckoutController::class,'RazorPayCheck']);
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);

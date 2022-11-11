@@ -54,27 +54,37 @@
                         <div class="card-body">
                             <h6>Order Details</h6>
                             <hr>
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <td>Name</td>
-                                        <td>Qty</td>
-                                        <td>Price</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($cartItems as $item)
-                                        <tr>                                            
-                                            <td>{{ $item->product->name }}</td>
-                                            <td>{{ $item->product_quantity }}</td>
-                                            <td>{{ $item->product->selling_price }}</td>
+                            @if ($cartItems->count() > 0)
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Qty</td>
+                                            <td>Price</td>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>                            
-                            <hr>
-                            <button type="submit" class="btn btn-primary w-100">Place Order | COD</button>
-                            <button type="button" class="btn btn-success w-100 mt-3 razorpay-btn">Pay with Razorpay</button>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $total = 0;
+                                        @endphp
+                                        @foreach ($cartItems as $item)
+                                        <tr>
+                                            @php $total += $item->product->selling_price * $item->product_quantity; @endphp
+                                                <td>{{ $item->product->name }}</td>
+                                                <td>{{ $item->product_quantity }}</td>
+                                                <td>{{ $item->product->selling_price }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <h6> Grand Total: <span class="float-end">{{ $total }}</span></h6>
+                                <hr>
+                                <button type="submit" class="btn btn-primary w-100">Place Order | COD</button>
+                                <button type="button" class="btn btn-success w-100 mt-3 razorpay-btn">Pay with
+                                    Razorpay</button>
+                            @else
+                                <h4 class="text-center">No Products in Cart</h4>
+                            @endif
                         </div>
                     </div>
                 </div>

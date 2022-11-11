@@ -48,7 +48,8 @@ $(document).ready(function () {
                 product_quantity: product_qty,
             },
             success: function (response) {
-                alert(response.status);
+                location.reload();l
+                swal(response.status);
             },
         });
     });
@@ -66,7 +67,8 @@ $(document).ready(function () {
                 product_id: product_id,
             },
             success: function (response) {
-                alert(response.status);
+                swal(response.status);
+                location.reload();
                 loadWishlist();
             },
         });
@@ -111,7 +113,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 location.reload();
-                alert(response.status);
+                swal(response.status);
             },
         });
     });
@@ -130,7 +132,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 location.reload();
-                alert(response.status);
+                swal(response.status);
             },
         });
     });

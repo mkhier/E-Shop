@@ -64,8 +64,36 @@
     </script>
     <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('frontend/js/custom.js') }}"></script>
-    <script src="{{ asset('frontend/js/checkout.js') }}"></script>    
+    <script src="{{ asset('frontend/js/checkout.js') }}"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        var availableTags = [];
+        $.ajax({
+            method: "GET",
+            url: "/product-list",
+            success: function(response) {
+                console.log(response);
+                startAutoComplete(response);
+            }
+        });
+
+        function startAutoComplete(availableTags) {
+            $("#search_product").autocomplete({
+                source: availableTags
+            });
+        }
+    </script>
+
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @if (session('status'))
+        <script>
+            swal("{{ session('status') }}");
+        </script>
+    @endif
     @yield('scripts')
+
 </body>
 
 </html>

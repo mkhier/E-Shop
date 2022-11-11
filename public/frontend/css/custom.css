@@ -19,6 +19,15 @@
     padding: 5px !important;
     margin-bottom: 6px;
 }
+
+.search-bar{
+    width: 40%;
+    margin-left: 5%;
+
+}
+.ui-menu{
+    z-index: 3500 !important;
+}
 /* rating */
 .rating-css div {
     color: #ffe400;

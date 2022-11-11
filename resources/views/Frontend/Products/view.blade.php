@@ -2,7 +2,7 @@
 
 @section('title', $products->name)
 @section('content')
-    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form action="{{ url('add-rating') }}" method="POST">
@@ -14,19 +14,19 @@
                     </div>
                     <div class="modal-body">
                         <div class="rating-css">
-                            @if ($user_rating)
-                                @for ($i = 1; $i <= $user_rating->stars_rated; $i++)
-                                    <input type="radio" value="{{ $i }}" name="product_rating" checked
-                                        id="rating{{ $i }}">
-                                    <label for="rating{{ $i }}" class="fa fa-star checked"></label>
-                                @endfor
-                                @for ($j = $user_rating->stars_rated + 1; $j <= 5; $j++)
-                                    <input type="radio" value="{{ $j }}" name="product_rating"
-                                        id="rating{{ $j }}">
-                                    <label for="rating{{ $j }}" class="fa fa-star"></label>
-                                @endfor
-                            @else
-                                <div class="star-icon">
+                            <div class="star-icon">
+                                @if ($user_rating)
+                                    @for ($i = 1; $i <= $user_rating->stars_rated; $i++)
+                                        <input type="radio" value="{{ $i }}" name="product_rating" checked
+                                            id="rating {{ $i }}">
+                                        <label for="rating {{ $i }}" class="fa fa-star"></label>
+                                    @endfor
+                                    @for ($j = $user_rating->stars_rated; $j <= 5; $j++)
+                                        <input type="radio" value="{{ $j }}" name="product_rating"
+                                            id="rating {{ $j }}">
+                                        <label for="rating {{ $j }}" class="fa fa-star"></label>
+                                    @endfor
+                                @else
                                     <input type="radio" value="1" name="product_rating" checked id="rating1">
                                     <label for="rating1" class="fa fa-star"></label>
                                     <input type="radio" value="2" name="product_rating" id="rating2">
@@ -37,7 +37,8 @@
                                     <label for="rating4" class="fa fa-star"></label>
                                     <input type="radio" value="5" name="product_rating" id="rating5">
                                     <label for="rating5" class="fa fa-star"></label>
-                            @endif
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -47,7 +48,7 @@
                 </form>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     <div class="py-3 mb-4 shadow-sm bg-warning border-top">
         <div class="container">
@@ -64,9 +65,9 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="card shadow product_data">
-            <div class="card-body">
+    <div class="container pb-5">
+        <div class="product_data">
+            <div class="">
                 <div class="row">
                     <div class="col-md-4 border-right">
                         <img src="{{ asset('assets/uploads/products/' . $products->image) }}" class="w-100"
@@ -82,9 +83,8 @@
                         </h2>
                         <hr>
 
-                        <label class="me-3">Original Price : <s>{{ $products->original_price }} SYP</s></Original>
-                        </label>
-                        <label class="fw-bold">Selling Price : {{ $products->original_price }} SYP</label>
+                        <label class="me-3">Original Price : <s>{{ $products->original_price }}</s> SYP</label>
+                        <label class="fw-bold">Selling Price : {{ $products->selling_price }} SYP</label>
                         @php
                             $ratenum = number_format($rating_value);
                         @endphp
@@ -97,7 +97,7 @@
                             @endfor
                             <span>
                                 @if ($ratings->count() > 0)
-                                    {{ $ratings->count() }} Rating
+                                    {{ $ratings->count() }} Ratings
                                 @else
                                     No Ratings
                                 @endif
@@ -159,11 +159,13 @@
                             <div class="user-review">
                                 <Label>{{ $item->user->name . ' ' . $item->user->last_name }}</Label>
                                 @if ($item->user_id == Auth::id())
-                                    <a href="{{url('edit-review/' .$products->slug. '/user-review')}}">Edit</a>
+                                    <a href="{{ url('edit-review/' . $products->slug . '/user-review') }}">Edit</a>
                                 @endif
                                 <br>
                                 @php
-                                    $rating = App\Models\Rating::where('product_id',$products->id)->where('user_id',$item->user->id)->first();
+                                    $rating = App\Models\Rating::where('product_id', $products->id)
+                                        ->where('user_id', $item->user->id)
+                                        ->first();
                                 @endphp
                                 @if ($rating)
                                     @php $user_rated = $rating->stars_rated @endphp
@@ -174,9 +176,9 @@
                                         <i class="fa fa-star"></i>
                                     @endfor
                                 @endif
-                                <small>Reviewed on {{$item->created_at->format('d M Y')}}</small>
+                                <small>Reviewed on {{ $item->created_at->format('d M Y') }}</small>
                                 <p>
-                                    {{$item->user_review}}
+                                    {{ $item->user_review }}
                                 </p>
                             </div>
                         @endforeach

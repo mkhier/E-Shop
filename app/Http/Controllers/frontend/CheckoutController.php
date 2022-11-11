@@ -15,13 +15,13 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        $old_cartItems = Cart::where('user_id', Auth::id())->get();
-        foreach ($old_cartItems as $item) {
-            if (Product::where('id', $item->product_id)->where('quantity', '>=', $item->product_quantity)->exists()) {
-                $remove_item = Cart::where('user_id', Auth::id())->where('product_id', $item->product_id)->first();
-                $remove_item->delete();
-            }
-        }
+        // $old_cartItems = Cart::where('user_id', Auth::id())->get();
+        // foreach ($old_cartItems as $item) {
+        //     if (Product::where('id', $item->product_id)->where('quantity', '>=', $item->product_quantity)->exists()) {
+        //         $remove_item = Cart::where('user_id', Auth::id())->where('product_id', $item->product_id)->first();
+        //         $remove_item->delete();
+        //     }
+        // }
         $cartItems = Cart::where('user_id', Auth::id())->get();
         return view('Frontend.checkout', compact('cartItems'));
     }
